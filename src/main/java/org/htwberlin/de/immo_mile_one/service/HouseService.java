@@ -43,8 +43,8 @@ public class HouseService {
     public List<House> getHouseFilterByLocationAndRoom(int room, String location){
         return houseCrudRepository.findHouseByRoomOrAndLocation(room,location);
     }
-    public void saveHouse(House house){
-      houseCrudRepository.save(house);
+    public House saveHouse(House house){
+      return houseCrudRepository.save(house);
 
     }
     public  House updateHouse(long house_id, House house){
