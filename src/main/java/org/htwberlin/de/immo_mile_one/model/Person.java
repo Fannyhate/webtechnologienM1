@@ -71,7 +71,9 @@ public class Person {
     @Column(unique=true)
     private String email;
 
-
+    @ManyToOne
+    @JoinColumn(name="house_preference_id", nullable=true)
+    private HousePreference myPreference;
     public void setId(Long id) {
         this.id = id;
     }
