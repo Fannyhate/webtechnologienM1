@@ -41,15 +41,4 @@ class HouseServiceTest {
 
     }
 
-    @Test
-    void saveHouse() {
-    }
-
-    @Test
-    void updateHouse() {
-    }
-
-    @Test
-    void deleteHouse() {
-    }
 }
