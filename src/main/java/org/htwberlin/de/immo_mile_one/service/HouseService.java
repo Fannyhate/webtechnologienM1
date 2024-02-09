@@ -58,6 +58,7 @@ public class HouseService {
             oldHouseValue.setFloor(house.getFloor());
             oldHouseValue.setLocation(house.getLocation());
 
+            oldHouseValue.setPrice(house.getPrice());
             houseCrudRepository.save(oldHouseValue);
         }
         return houseCrudRepository.findById(house_id).orElseThrow();

@@ -1,9 +1,6 @@
 package org.htwberlin.de.immo_mile_one.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class HousePreference {
@@ -52,10 +49,21 @@ public class HousePreference {
         return hasLift;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     public void setHasLift(boolean hasLift) {
         this.hasLift = hasLift;
     }
 
+    @ManyToOne
+    @JoinColumn(name="person_id", nullable=false)
+    private Person person;
     private int numberOfRoom;
     private boolean hasLift;
 }

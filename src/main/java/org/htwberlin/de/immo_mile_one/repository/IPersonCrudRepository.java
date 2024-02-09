@@ -10,13 +10,6 @@ import java.util.Optional;
 public interface  IPersonCrudRepository extends CrudRepository <Person, Long > {
 
     Optional<Person> findById(long personId);
-    List<Person>findPersonByEmailOrRenter(String email, boolean renter);
     Person findAllByEmailAndPassword(String email, String password);
-
-
-    /*
-    Person addMyHome (House house);
-
-     */
 
 }

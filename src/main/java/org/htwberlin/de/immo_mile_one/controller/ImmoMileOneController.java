@@ -1,13 +1,12 @@
 package org.htwberlin.de.immo_mile_one.controller;
-import jakarta.persistence.PostUpdate;
 import org.htwberlin.de.immo_mile_one.model.House;
 import org.htwberlin.de.immo_mile_one.model.HouseImage;
-import org.htwberlin.de.immo_mile_one.model.Person;
+import org.htwberlin.de.immo_mile_one.service.EmailService;
 import org.htwberlin.de.immo_mile_one.service.HouseImageService;
 import org.htwberlin.de.immo_mile_one.service.HouseService;
+import org.htwberlin.de.immo_mile_one.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.service.annotation.DeleteExchange;
 
 import java.util.List;
 
@@ -18,6 +17,12 @@ public class  ImmoMileOneController {
     private HouseService houseService;
     @Autowired
     private HouseImageService houseImageService;
+
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private EmailService emailService;
 
 
     @GetMapping("/api/house")
@@ -41,7 +46,13 @@ public class  ImmoMileOneController {
     }
     @PostMapping("api/house")
     public void addHouse(@RequestBody House house) {
-        houseService.saveHouse(house);
+       var returnHouse =  houseService.saveHouse(house);
+       var personsPreference = personService.getPreferences(returnHouse.getLift(), returnHouse.getPrice(), returnHouse.getLocation(), returnHouse.getRoom());
+
+        for (var personPrefs: personsPreference) {
+            emailService.sendEmailFirstContact(personPrefs, returnHouse);
+        }
+
     }
 
     @PostMapping("api/apply_house")
