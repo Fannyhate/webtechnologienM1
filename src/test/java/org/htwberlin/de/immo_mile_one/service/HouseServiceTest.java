@@ -29,13 +29,18 @@ class HouseServiceTest {
         house.setPrice(223.98);
         house.setRoom(2);
 
-        var person = personService.getPeople().get(0);
-        var returnPerson = personService.savePeople(person);
-        house.setMyHome(returnPerson);
+        var people = personService.getPeople();
+        Person person = null;
+        if(people.size()> 0){
+            person = people.get(0);
+        }
+        house.setMyHome(person);
 
         var houseObject =houseService.saveHouse(house);
 
         assertEquals(true, houseService.getHouses().size()>0 );
+
+        houseService.deleteHouse(houseObject.getId());
 
 
 
