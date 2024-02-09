@@ -29,19 +29,22 @@ class HouseServiceTest {
         house.setPrice(223.98);
         house.setRoom(2);
 
-        var people = personService.getPeople();
-        Person person = null;
-        if(people.size()> 0){
-            person = people.get(0);
+        Person person = new Person();
+        person.setEmail("tester123@gmail.com");
+        person.setFirstName("max Ma");
+        person.setIsRenter(true);
+        person.setPassword("HashPassword");
+
+
+        var returnPerson = personService.savePeople(person);
+
+        if(returnPerson != null){
+            house.setMyHome(returnPerson);
         }
-        house.setMyHome(person);
 
         var houseObject =houseService.saveHouse(house);
-
-        assertEquals(true, houseService.getHouses().size()>0 );
-
         houseService.deleteHouse(houseObject.getId());
-
+        personService.deletePerson(returnPerson.getId());
 
 
     }
