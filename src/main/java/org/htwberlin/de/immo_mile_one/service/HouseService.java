@@ -66,10 +66,11 @@ public class HouseService {
 
     public  void deleteHouse(long house_id){
         var house = houseCrudRepository.findById(house_id);
-        var houseValue = house.orElseThrow();
-        houseValue.getPerson_apply_house().clear();
+        var houseValue = house.get();
+        if(houseValue != null){
+            houseCrudRepository.deleteById(house_id);
+        }
 
-        houseCrudRepository.deleteById(house_id);
     }
 
     private boolean checkPerson (long personId , List<Person> people){

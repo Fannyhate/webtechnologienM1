@@ -37,6 +37,8 @@ class HouseServiceTest {
 
         assertEquals(true, houseService.getHouses().size()>0 );
 
+        houseService.deleteHouse(houseObject.getId());
+
     }
 
     @Test

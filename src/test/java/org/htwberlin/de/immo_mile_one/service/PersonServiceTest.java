@@ -18,7 +18,7 @@ class PersonServiceTest {
     void getPeople() {
 
         Person person = new Person();
-        person.setEmail("tester@gmail.com");
+        person.setEmail("tester123@gmail.com");
         person.setFirstName("max Ma");
         person.setIsRenter(true);
         person.setPassword("HashPassword");
@@ -28,13 +28,16 @@ class PersonServiceTest {
 
         assertEquals(true, personService.getPeople().size()>0);
 
+        personService.deletePerson(returnPerson.getId());
+
+
     }
 
     @Test
     void getPersonById() {
 
         Person person = new Person();
-        person.setEmail("tester@gmail.com");
+        person.setEmail("tester123@gmail.com");
         person.setFirstName("max Ma");
         person.setIsRenter(true);
         person.setPassword("HashPassword");
@@ -45,13 +48,16 @@ class PersonServiceTest {
         var obtainPerson = personService.getPersonById(returnPerson.getId()).get();
 
         assertEquals(obtainPerson.getId(), returnPerson.getId());
+
+        personService.deletePerson(returnPerson.getId());
+
     }
 
     @Test
     void savePeople() {
 
         Person person = new Person();
-        person.setEmail("tester@gmail.com");
+        person.setEmail("tester123@gmail.com");
         person.setFirstName("max Ma");
         person.setIsRenter(true);
         person.setPassword("HashPassword");
@@ -61,6 +67,7 @@ class PersonServiceTest {
 
         assertEquals(person.getEmail(), returnPerson.getEmail() );
 
+        personService.deletePerson(returnPerson.getId());
 
     }
 }
